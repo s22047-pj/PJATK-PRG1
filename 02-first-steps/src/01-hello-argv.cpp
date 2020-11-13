@@ -5,19 +5,24 @@
 #include <iostream>
 #include <string>
 
+auto get_argument(int const argc, char* argv[], int const n) -> std::string
+{
+    if (n >= argc)
+    {
+        throw std::logic_error{"not enaugh arguments"};    
+    }
+    return std::string{argv[n]};
+}
+
 auto main(int argc, char* argv[]) -> int
 {
-    try
-    {
-        if (argc == 0) {
-            throw std::string{""};
-        }
-        auto const name = std::string{argv[1]};
+    try{
+        auto const name = get_argument(argc, argv, 1);
         std::cout << "Hello, " << name << "!\n";
     }
-    catch (std::exception const& error)
+    catch (std::string nothing)
     {
-        std::cerr << ("no argument has been entered: ") << error.what() << '\n';    
+        std::cout << nothing;    
     }
 
     return 0;
