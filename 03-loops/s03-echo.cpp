@@ -1,48 +1,53 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
+auto arr_reverse(int argc, std::string(char* argv_in[])) -> std::string
+{
+    std::string argv_rev[2];
+    for (int i=argc; i > 1; i--)
+    {
+        argv_rev[i] = argv_in[i];
+    }  
+
+    return 
+}
 
 auto main(int argc, char* argv[]) -> int
 {
-    try
-    {
-        auto new_line = "\n";
 
-        if (argc == 0) {
-            throw std::string{""};
-        }
-
-        if (std::string{argv[1]} == "-n")
-        {
-            for (int i=0; i<argc; i++)
-            {
-                std::cout << std::string{argv[i]} << ", ";
-            }           
-        }  
-
-        else if (std::string{argv[1]} == "-l")
-        {
-            for (int i=0; i<argc; i++)
-            {
-                std::cout << std::string{argv[i]} << std::endl;
-            }
-        }
-
-        else if (std::string{argv[1]} == "-r")
-        {
-            for (int i=argc; i>0; i--)
-            {
-                std::cout << std::string{argv[i]} << ", ";
-            }                  
-        }
-
-        std::cout << new_line;
-
+    if (argc == 0) {
+        return 1;
     }
-    catch (std::exception const& error)
+
+    auto new_line = std::string{"\n"};
+    auto separator = std::string{" "};
+
+    if (std::string{argv[1]} == "-n")
     {
-        std::cerr << ("no argument has been entered: ") << error.what() << '\n';    
+        new_line = "";    
+    }  
+
+    if (std::string{argv[1]} == "-l")
+    {
+        separator = "\n";    
+    } 
+
+    if (std::string{argv[1]} == "-r")
+    {
+        for (int i=argc; i > 1; i--)
+        {
+            std::cout << argv[i] << separator;
+        }    
+    } 
+
+    for (int i=1; i < argc; i++)
+    {
+        std::cout << argv[i] << separator;
     }
+
+    std::cout << new_line;
+
 
     return 0;
 }

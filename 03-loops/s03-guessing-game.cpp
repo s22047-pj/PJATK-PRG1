@@ -1,24 +1,37 @@
 #include <iostream>
 #include <random>
 
-auto main() -> int
+auto ask_user_for_integer(std::string prompt) -> int
+{
+    std::cout << prompt;
+    auto n = std::string{};
+    std::getline(std::cin, n);
+
+    return std::stoi(n);
+}
+
+int generate_number()
 {
     std::random_device rd;
     std::uniform_int_distribution<int> guess100 (1, 100);
+    int random_number = guess100(rd);
+    return random_number;
+}
 
-    int x = guess100(rd);
+void guess_number()
+{
+    int const num_to_guess = generate_number();
+    auto user_guess = int{0};
 
-    int user_guess;
-    while (true)
+    while (num_to_guess != user_guess)
     {
-        std::cout << "guess: ";
-        std::cin >> user_guess;
+        user_guess = ask_user_for_integer("guess: ");
 
-        if (user_guess == x)
+        if (user_guess == num_to_guess)
         {
             break;        
         }
-        if (user_guess > x) 
+        if (user_guess > num_to_guess) 
         {
             std::cout << "number too big!" << std::endl;
         }   
@@ -29,6 +42,11 @@ auto main() -> int
         
     }    
     std::cout << "just right!" << std::endl;
+}
 
+auto main() -> int
+{
+    guess_number();
+  
     return 0;
 }
