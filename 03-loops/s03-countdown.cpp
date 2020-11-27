@@ -3,14 +3,11 @@
 
 auto main(int argc, char* argv[]) -> int
 {
-    if (argc < 2) {
-        throw std::logic_error{"not enaugh arguments"};
-    }
 
     try {
         auto const a = std::stoi(argv[1]);
 
-        for (int i = a; i >= 0; i--) {
+        for (auto i = a; i >= 0; i--) {
             std::cout << i << "..." << std::endl;
         }
     } catch (std::out_of_range const& error) {
