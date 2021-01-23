@@ -15,6 +15,24 @@ std::vector<std::string> reverse_vector(std::vector<std::string> vector_to_rever
     return vector_to_reverse;
 reverse_vector(main_vector, argc);
 }
+
+for (int i = 0; i < 2; i++)
+{
+    if (main_vector.at(i) == "-l")
+    {
+        separator = "\n";
+    }
+
+    if (main_vector.at(i) == "-n")
+    {
+        new_line = "";
+    }
+
+    if (main_vector.at(i) == "-r")
+    {
+        std::reverse(main_vector.begin(), main_vector.end());
+    }
+}
 */
 
 std::vector<std::string> create_vector(int const argc, char* argv[])
@@ -32,37 +50,41 @@ std::vector<std::string> create_vector(int const argc, char* argv[])
 
 auto main(int argc, char* argv[]) -> int
 {
-
     auto main_vector = create_vector(argc, argv);
+    auto print_vector = std::vector<std::string>{};
 
-    std::string new_line = "\n";
-    std::string separator = " ";
+    auto new_line = std::string{"\n"};
+    auto separator = std::string{" "};
+    auto reverse_order = true;
 
 
-    for (int i = 0; i < 2; i++)
-    {
-        if (main_vector.at(i) == "-l")
-        {
+
+    for (auto i = size_t{0}; i < main_vector.size(); ++i) {
+        auto const& each = main_vector.at(i);
+        if (each == "-l") {
             separator = "\n";
-        }
-
-        if (main_vector.at(i) == "-n")
-        {
+        } else if (each == "-n") {
             new_line = "";
-        }
-
-        if (main_vector.at(i) == "-r")
-        {
+        } else if (each == "-r") {
             std::reverse(main_vector.begin(), main_vector.end());
+        } else {
+            std::copy(main_vector.begin() + i, main_vector.end(), std::back_inserter(print_vector));
+            break;
         }
     }
 
-
-
+    /*
     for (int i = 0; i < int(main_vector.size()); i++)
     {
         std::cout << main_vector.at(i) << separator;
+    }*/
+
+    if (reverse_order){
+        for (auto const& each : print_vector) {
+            std::cout << each << separator;
+        }
     }
+
 
     std::cout << new_line;  
  
