@@ -21,7 +21,7 @@ auto ask_user_for_password(std::string prompt) -> std::string
 auto main(int const argc, char* argv[]) -> int
 {
     auto const defined_password = get_argument(argc, argv, 1);
-    std::string user_password;
+    auto user_password = std::string{};
 
     while (defined_password != user_password) {
         user_password = ask_user_for_password("enter password: ");
