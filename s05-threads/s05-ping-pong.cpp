@@ -15,7 +15,7 @@ auto print(std::mutex& mtx,
     std::random_device rd;
     std ::uniform_int_distribution<int> random_number(1, 42);
 
-    std::unique_lock lck{mtx};
+    std::unique_lock<std::mutex> lck{mtx};
     while (current_number <= 1024) {
         cv.wait(lck);
         auto add_number = random_number(rd);
